@@ -19,7 +19,7 @@ EOF
 
 yum install -y zlib-devel
 cd $SHARED_APP
-git clone git@github.com:axboe/fio.git
+git clone https://github.com/axboe/fio.git
 
 cd $APP_NAME
 ./configure --prefix=${INSTALL_DIR}
