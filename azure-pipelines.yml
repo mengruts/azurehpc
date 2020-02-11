@@ -22,4 +22,7 @@ steps:
     filePath: 'install.sh'
 - task: Bash@3
   inputs:
+    filePath: 'libexec/azhpc-init.sh'
+- task: Bash@3
+  inputs:
     filePath: 'libexec/azhpc-init.sh -c examples/simple_hpc_pbs -d simple_hpc_pbs -s'
