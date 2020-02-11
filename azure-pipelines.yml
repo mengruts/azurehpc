@@ -17,12 +17,6 @@ steps:
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
-- task: CmdLine@2
+- task: Bash@3
   inputs:
-    script: |
-      echo System.DefaultWorkingDirectory:
-      echo $(System.DefaultWorkingDirectory)
-      echo Build.SourcesDirectory:
-      echo $(Build.SourcesDirectory)
-      echo Build.ArtifactStagingDirectory:
-      echo $(Build.ArtifactStagingDirectory)
+    filePath: '/libexec/azhpc-init.sh'
