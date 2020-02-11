@@ -19,4 +19,7 @@ steps:
   displayName: 'Run a multi-line script'
 - task: Bash@3
   inputs:
-    filePath: 'libexec/azhpc-init.sh'
+    filePath: 'install.sh'
+- task: Bash@3
+  inputs:
+    filePath: 'libexec/azhpc-init -c $azhpc_dir/examples/simple_hpc_pbs -d simple_hpc_pbs -s'
