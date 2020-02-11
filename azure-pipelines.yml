@@ -19,4 +19,4 @@ steps:
   displayName: 'Run a multi-line script'
 - task: ShellScript@2
   inputs:
-    filePath: 'libexec/azhpc-init.sh'
+    filePath: 'libexec/azhpc-init2.sh'
