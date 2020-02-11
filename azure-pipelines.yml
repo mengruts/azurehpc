@@ -21,5 +21,8 @@ steps:
   inputs:
     script: |
       echo System.DefaultWorkingDirectory:
-      
       echo $(System.DefaultWorkingDirectory)
+      echo Build.SourcesDirectory:
+      echo $(Build.SourcesDirectory)
+      echo Build.ArtifactStagingDirectory:
+      echo $(Build.ArtifactStagingDirectory)
