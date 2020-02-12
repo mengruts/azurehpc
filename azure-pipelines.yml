@@ -33,7 +33,7 @@ steps:
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
-      . azurehpc/install.sh
+      ./install.sh
       azhpc-init -c examples/simple_hpc_pbs -d simple_hpc_pbs -v resource_group=hol-azurehpc2 
       cd examples/simple_hpc_pbs
       ../../libexec/azhpc-build.sh
