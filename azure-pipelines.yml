@@ -25,24 +25,14 @@ steps:
 #    inlineScript: |
 #      az vm start -g hol-azurehpc -n headnode
 #      az vmss start -g hol-azurehpc -n compute
-- task: Bash@3
-  inputs:
-    filePath: 'libexec/azhpc-init.sh'
-    arguments: ' -c examples/simple_hpc_pbs -d simple_hpc_pbs -v resource_group=hol-azurehpc2'
-- task: CmdLine@2
-  inputs:
-    script: 'cd examples/simple_hpc_pbs ; echo $(pwd); ../../libexec/azhpc-build.sh'
 
 - task: Bash@3
   inputs:
     targetType: 'inline'
     script: |
       cd examples/simple_hpc_pbs
-      echo $(pwd)
-      libexec/azhpc-build.sh
-
-
-    
+      ../../libexec/azhpc-init.sh -c examples/simple_hpc_pbs -d simple_hpc_pbs -v resource_group=hol-azurehpc2 
+      ../../libexec/azhpc-build.sh
 
 # - task: AzureCLI@2
 #  inputs:
