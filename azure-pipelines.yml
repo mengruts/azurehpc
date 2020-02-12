@@ -31,10 +31,18 @@ steps:
     arguments: ' -c examples/simple_hpc_pbs -d simple_hpc_pbs -v resource_group=hol-azurehpc2'
 - task: CmdLine@2
   inputs:
-    script: 'cd examples/simple_hpc_pbs ; echo $(pwd)'
+    script: 'cd examples/simple_hpc_pbs ; echo $(pwd); libexec/azhpc-build.sh'
+
 - task: Bash@3
   inputs:
-    filePath: 'libexec/azhpc-build.sh'
+    targetType: 'inline'
+    script: |
+      cd examples/simple_hpc_pbs
+      echo $(pwd)
+      libexec/azhpc-build.sh
+
+
+    
 
 # - task: AzureCLI@2
 #  inputs:
