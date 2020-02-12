@@ -6,7 +6,7 @@
     "variables": {
         "hpc_image": "OpenLogic:CentOS-HPC:7.6:latest",
         "location": "southcentralus",
-        "resource_group": "<NOT-SET>",
+        "resource_group": "hol-azurehpc",
         "vm_type": "Standard_HB60rs",
         "compute_instances": 2,
         "vnet_resource_group": "variables.resource_group"
