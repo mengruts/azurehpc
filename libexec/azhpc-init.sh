@@ -1,8 +1,8 @@
 #!/bin/bash
 
 azhpc_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
-# source "$azhpc_dir/libexec/common.sh"
-source "libexec/common.sh"
+source "$azhpc_dir/libexec/common.sh"
+# source "libexec/common.sh"
 
 config_file="config.json"
 
