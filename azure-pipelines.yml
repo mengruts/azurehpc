@@ -37,6 +37,13 @@ steps:
       libexec/azhpc-init.sh -c examples/simple_hpc_pbs -d simple_hpc_pbs -v resource_group=hol-azurehpc2 
       cd examples/simple_hpc_pbs
       ../../libexec/azhpc-build.sh
+      echo 'azhpc-build done.'
+      echo 'Connecting to cluster'
+      azhpc-connect -u hpcuser headnode
+      qstat -Q
+      pbsnodes -avS
+      df -h
+
 
 # - task: AzureCLI@2
 #  inputs:
