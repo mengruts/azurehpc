@@ -30,8 +30,7 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      export azhpc_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
-      azhpc-init -c examples/simple_hpc_pbs -d simple_hpc_pbs -v resource_group=hol-azurehpc2 
+      libexec/azhpc-init.sh -c examples/simple_hpc_pbs -d simple_hpc_pbs -v resource_group=hol-azurehpc2 
       cd examples/simple_hpc_pbs
       ../../libexec/azhpc-build.sh
 
