@@ -27,11 +27,8 @@ steps:
       az vmss start -g hol-azurehpc -n compute
 - task: Bash@3
   inputs:
-    targetType: 'inline'
-    script: |
-      # Write your commands here
-      
-      echo 'do something'
+    filePath: 'libexec\azhpc-connect.sh'
+    arguments: '-u hpcuser headnode'
 - task: AzureCLI@2
   inputs:
     azureSubscription: 'Microsoft Azure Internal Consumption(57a9df44-d195-45a7-9781-c6f4a1d08080)'
