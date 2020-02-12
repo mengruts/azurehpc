@@ -39,7 +39,7 @@ steps:
       ../../libexec/azhpc-build.sh
       echo 'azhpc-build done.'
       echo 'Connecting to cluster'
-      ../../azhpc-connect.sh -u hpcuser headnode
+      ../../libexec/azhpc-connect.sh -u hpcuser headnode
       qstat -Q
       pbsnodes -avS
       df -h
