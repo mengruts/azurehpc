@@ -31,7 +31,7 @@ steps:
     targetType: 'inline'
     script: |
       cd examples/simple_hpc_pbs
-      ../../libexec/azhpc-init.sh -c simple_hpc_pbs -d simple_hpc_pbs -v resource_group=hol-azurehpc2 
+      ../../libexec/azhpc-init.sh -c . -d simple_hpc_pbs -v resource_group=hol-azurehpc2 
       ../../libexec/azhpc-build.sh
 
 # - task: AzureCLI@2
