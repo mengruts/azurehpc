@@ -39,6 +39,13 @@ variables:
   azhpc.init_variables: low_priority=true
 # <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your commands here
+      
+      find ../../ -name *.yml
 jobs:
 - template: templates/jobs/build_cluster.yml
   parameters:
