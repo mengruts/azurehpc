@@ -40,7 +40,7 @@ variables:
 # <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 jobs:
-- template: ../../templates/jobs/build_cluster.yml
+- template: templates/jobs/build_cluster.yml
   parameters:
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
       extra_steps: ../../examples/simple_hpc_pbs/test.yml
