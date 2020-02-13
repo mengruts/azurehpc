@@ -1,54 +1,57 @@
+trigger: none
+# Uncomment the below section if you want to schedule your pipeline
+# schedules:
+# - cron: "0 0 * * *"
+#   displayName: Daily midnight build
+#   branches:
+#     include:
+#     - master
+#   always: true
+pool: Default
+#  vmImage: Ubuntu-16.04
 
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
+variables:
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# TODO : Add the variables needed in your configuration file below
+  # Required variables
+  # ==================
+  # configuration file to use
+  azhpc.config: azurehpc/examples/simple_hpc_pbs/config.json
+  azhpc.pipeline_dir: examples/simple_hpc_pbs
+  azhpc.hpc_image: OpenLogic:CentOS-HPC:7.6:latest
+  azhpc.location: westeurope
+  azhpc.vm_type: Standard_HC44rs
+  azhpc.compute_instances: 4
+  # To enable multiple configurations to be run in parallel, store all your configs into a json file and comment out the line below
+  #azhpc.variables_matrix: healthcheck/matrix.json
 
-trigger:
-- master
+  # Optional variables
+  # ==================
+  # If branch is not specified the master branch if azhpc will be checked out
+  #azhpc.branch: telemetry
+  # uncomment to not add telemetry extentions to compute VMSS
+  #azhpc.add_telemetry: 0
+  # destination of scripts. Default is hpcuser@headnode:/apps
+  #azhpc.script_remote_dest: 'hpcadmin@jumpbox:.'
 
-pool:
-  vmImage: 'ubuntu-latest'
+  # additional variable list provided as part of the azhpc-init (comma separated without space)
+  #azhpc.init_variables: variable1=value1,variable2=value2
+  azhpc.init_variables: low_priority=true
+# <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-steps:
-# - script: echo Hello, world!
-#   displayName: 'Run a one-line script'
 
-- script: |
-#    echo Add other tasks to build, test, and deploy your project.
-#    echo See https://aka.ms/yaml
-#  displayName: 'Run a multi-line script'
-# - task: AzureCLI@2
-#  inputs:
-#    azureSubscription: 'Microsoft Azure Internal Consumption(57a9df44-d195-45a7-9781-c6f4a1d08080)'
-#    scriptType: 'bash'
-#    scriptLocation: 'inlineScript'
-#    inlineScript: |
-#      az vm start -g hol-azurehpc -n headnode
-#      az vmss start -g hol-azurehpc -n compute
 
-- task: AzureCLI@2
+jobs:
+- task: Bash@3
   inputs:
-    azureSubscription: 'Microsoft Azure Internal Consumption(57a9df44-d195-45a7-9781-c6f4a1d08080)'
-    scriptType: 'bash'
-    scriptLocation: 'inlineScript'
-    inlineScript: |
-      ./install.sh
-      libexec/azhpc-init.sh -c examples/simple_hpc_pbs -d simple_hpc_pbs -v resource_group=hol-azurehpc2 
-      cd examples/simple_hpc_pbs
-      ../../libexec/azhpc-build.sh
-      echo 'azhpc-build done.'
-      echo 'Connecting to cluster'
-      ../../libexec/azhpc-connect.sh -u hpcuser headnode
-      qstat -Q
-      pbsnodes -avS
-      df -h
+    targetType: 'inline'
+    script: |
+      # Write your commands here
+      
+      find ../../ -name *.yml
 
-# - task: AzureCLI@2
-#  inputs:
-#    azureSubscription: 'Microsoft Azure Internal Consumption(57a9df44-d195-45a7-9781-c6f4a1d08080)'
-#    scriptType: 'bash'
-#    scriptLocation: 'inlineScript'
-#    inlineScript: |
-#      az vm stop -g hol-azurehpc -n headnode
-#      az vmss stop -g hol-azurehpc -n compute
+- template: templates/jobs/build_cluster.yml
+  parameters:
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+      extra_steps: ../../examples/simple_hpc_pbs/test.yml
+# <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
